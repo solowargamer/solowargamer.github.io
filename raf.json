@@ -1,0 +1,177 @@
+﻿{
+    "Results": {
+        "BBoxCol": "1,2,3,4-5,6-7,8-9,10-11,12-14,15-17,18-20,21-24,25+",
+        "BBoxData": {
+            "4": "-,-,1,1,1,2,2,2,H,H,H"
+        },
+        "H": {
+            "FG": {
+                "-": "To Close Escort.  If no Grupen are in Bomb Box, move to Inflight",
+                "D": "To Inflight",
+                "A": "To Inflight Reduced",
+                "L": "To Light Loss (+1 VP)",
+                "H": "To Heavy Loss (+2 VP)"
+            },
+            "RG": {
+                "-": "To Inflight",
+                "D": "To Inflight",
+                "A": "To Light Loss Full (+1 VP)",
+                "L": "To Light Loss Full (+1 VP)",
+                "H": "To Heavy Loss (+2 VP)"
+            },
+            "FS": {
+                "-": "To Bomb Box or Inflight",
+                "D": "To Bomb Box Reduced or Inflight Full",
+                "A": "To Inflight Reduced",
+                "L": "To Light Loss (-1 VP)",
+                "H": "To Heavy Loss (-2 VP)"
+            },
+            "RS": {
+                "-": "To Bomb Box Reduced.  If no Grupen are in Bomb Box, move to Inflight",
+                "D": "To Inflight Reduced",
+                "A": "To Light Loss Full (-1 VP)",
+                "L": "To Light Loss Full (-1 VP)",
+                "H": "To Heavy Loss Full (-2 VP)"
+            }
+        },
+        "B": {
+            "FG": {
+                "-": "Stay in Bomb Box",
+                "D": "Stay in Bomb Box Reduced",
+                "A": "To Inflight Reduced",
+                "L": "To Light Loss (+1 VP)",
+                "H": "To Heavy Loss (+2 VP)"
+            },
+            "RG": {
+                "-": "Stay in Bomb Box Reduced",
+                "D": "To Inflight Reduced",
+                "A": "To Light Loss Full (+1 VP)",
+                "L": "To Light Loss Full (+1 VP)",
+                "H": "To Heavy Loss Full (+2 VP)"
+            },
+            "FS": {
+                "-": "To Inflight",
+                "D": "To Inflight Reduced",
+                "A": "To Inflight Reduced",
+                "L": "To Light Loss (-1 VP)",
+                "H": "To Heavy Loss (-2 VP)"
+            },
+            "RS": {
+                "-": "To Inflight Reduced",
+                "D": "To Inflight Reduced",
+                "A": "To Light Loss Full (-1 VP)",
+                "L": "To Light Loss Full (-1 VP)",
+                "H": "To Heavy Loss Full (-2 VP)"
+            }
+        },
+        "E": {
+            "FG": {
+                "-": "To Inflight",
+                "D": "To Inflight Reduced",
+                "A": "To Inflight Reduced",
+                "L": "To Light Loss (+1 VP)",
+                "H": "To Heavy Loss (+2 VP)"
+            },
+            "RG": {
+                "-": "To Inflight Reduced",
+                "D": "To Inflight Reduced",
+                "A": "To Light Loss Full (+1 VP)",
+                "L": "To Light Loss Full (+1 VP)",
+                "H": "To Heavy Loss (+2 VP)"
+            }
+        }
+    },
+
+    "Chart": {
+        "Col": {
+            "1": "-,1,-,2,-,3,4,5,6,7,8+",
+            "2": "-,1,-,2,3,4,5,6,7,8,9,10+",
+            "3": "1,-,2,3,4,5,6,7,8,9,10+,"
+        },
+        "Row": {
+            "A": "A,-1 or less,0 or less,1 or less,1 or less,2 or less,3 or less,4 or less,5 or less,7 or less,10 or less,14 or less",
+            "B": "B,0,1,2,2-3,3-4,4-5,5-7,6-8,8-10,11-14,15-18",
+            "C": "C,1,2,3-4,4-5,5-6,6-7,8-10,9-12,11-14,15-18,19-23",
+            "D": "D,2,3,5,6-7,7-9,8-10,11-14,13-16,15-19,19-23,24-29",
+            "E": "E,3,4,6-7,8-9,10-12,11-14,15-18,17-21,20-26,24-30,30-36",
+            "F": "F,4,5-6,8-9,10-12,13-16,15-18,19-23,22-27,27-35,31-39,37-45",
+            "G": "G,5,7-8,10-11,13-15,17-20,19-24,24-29,28-35,36-44,40-51,46-58",
+            "H": "H,6,9-10,12-14,16-19,21-24,25-30,30-37,36-45,45-54,52-64,59-75",
+            "I": "I,7+,11+,15+,20+,25+,31+,38+,46+,55+,65+,76+"
+        },
+        "CRT": {
+            "1": [
+                "1,D,-,-,H,L,H",
+                "2,-,D,-,A,H,H",
+                "3,-,D,D,H,H,A",
+                "4,-,A,-,H,L,L",
+                "5,D,-,A,L,H,L",
+                "6,A,-,D,L,A,H"
+            ],
+            "2": [
+                "1,-,A,-,H,L,D",
+                "2,D,-,D,A,D,H",
+                "3,-,D,A,D,H,A",
+                "4,A,-,D,L,A,L",
+                "5,A,A,-,L,L,A",
+                "6,D,D,A,A,A,L"
+            ],
+            "3": [
+                "1,D,A,-,A,H,A",
+                "2,D,D,A,D,A,H",
+                "3,A,D,D,H,D,D",
+                "4,-,-,L,A,A,L",
+                "5,-,L,-,D,L,A"
+            ],
+            "4": [
+                "6,L,-,D,L,D,D",
+                "1,A,-,D,L,D,A",
+                "2,A,A,-,A,L,D",
+                "3,D,D,A,D,A,L",
+                "4,-,L,A,L,A,-",
+                "5,D,D,L,-,L,A",
+                "6,L,A,D,A,-,L"
+            ],
+            "5": [
+                "1,A,-,A,L,D,A",
+                "2,-,L,D,A,L,D",
+                "3,D,A,A,-,A,L",
+                "4,L,A,-,D,D,L",
+                "5,A,A,A,L,-,D",
+                "6,A,D,L,D,L,-"
+            ],
+            "6": [
+                "1,L,D,-,L,A,D",
+                "2,-,L,A,D,D,L",
+                "3,A,-,L,-,L,A",
+                "4,D,L,A,D,D,A",
+                "5,L,A,D,A,A,-",
+                "6,A,A,L,A,-,D"
+            ],
+            "7": [
+                "1,D,A,L,L,D,D",
+                "2,D,H,A,-,L,D",
+                "3,A,D,H,D,-,L",
+                "4,L,L,D,A,D,-",
+                "5,L,D,L,D,-,A",
+                "6,H,L,D,-,A,-"
+            ],
+            "8": [
+                "1,D,H,A,A,-,D",
+                "2,L,D,H,D,A,-",
+                "3,H,L,D,-,D,A",
+                "4,A,L,H,-,D,D",
+                "5,H,A,L,D,-,D",
+                "6,L,H,L,D,D,-"
+            ],
+            "9": [
+                "1,L,A,H,A,-,-",
+                "2,A,H,H,-,A,-",
+                "3,H,H,A,-,-,A",
+                "4,H,L,H,-,D,-",
+                "5,H,H,L,D,-,-",
+                "6,H,H,H,-,-,D"
+            ]
+        }
+    }
+}

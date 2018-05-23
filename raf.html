@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>RAF Lion</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="js/jsel.js"></script>
+    <script type="application/json" src="raf.json"></script>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="wrapper wrapper-content gray-bg">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Hunt Results</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row white-bg">
+                        <div class="col-sm-4 m-b-xs">
+                            <strong><span style="color: darkgreen">Good Condition</span></strong>
+                            <input type="radio" checked="checked" value="0" id="radGreen" name="optionsRadios">
+                        </div>
+                        <div class="col-sm-4 m-b-xs">
+                            <span style="color: maroon">Deplete 1</span>
+                            <input type="radio" value="1" id="radDeplete1" name="optionsRadios">
+                        </div>
+                        <div class="col-sm-4 m-b-xs">
+                            <span style="color: maroon">Deplete 2</span>
+                            <input type="radio" value="2" id="radDeplete2" name="optionsRadios">
+                        </div>
+                    </div>
+                    <p/>
+                    <div class="row white-bg">
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span id="Columns">Column - 2</span></strong>
+                            <input id="sliderCol" type="range" min="1" max="12" step="1" value="4"
+                                   onchange="RefreshColumn();"/>
+                        </div>
+                    </div>
+                    <p/>
+                    <div class="row white-bg">
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span id="Rows">Row - ??</span></strong>
+                            <input id="sliderRow" type="range" min="-1" max="76" step="1" value=""
+                                   onchange="RefreshRow();"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Grupen in Hunt Box</h5>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Squadron in Hunt Box</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <strong><span style="color: darkgreen" id="HFG"></span></strong>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <strong><span style="color: darkgreen" id="HFS"></span></strong>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <span style="color: maroon" id="HRG"></span>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <span style="color: maroon" id="HRS"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Grupen in Bomb Box</h5>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Squadron in Bomb Box</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <strong><span style="color: darkgreen" id="BFG"></span></strong>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <strong><span style="color: darkgreen" id="BFS"></span></strong>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <span style="color: maroon" id="BRG"></span>
+                        </div>
+                        <div class="col-sm-6 m-b-xs">
+                            <span style="color: maroon" id="BRS"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Grupen in Escort</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row white-bg">
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span style="color: darkgreen" id="EFG"></span></strong>
+                        </div>
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span style="color: maroon" id="ERG"></span></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row white-bg">
+                        <div class="col-sm-6 m-b-xs">
+                            <h5>Bombing Box Results</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row white-bg">
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span id="Bing">Row - ??</span></strong>
+                            <input id="sliderBing" type="range" min="1" max="12" step="1" value=""
+                                   onchange="HandleBingBox()"/>
+                            <P/>
+                        </div>
+                        <div class="col-sm-12 m-b-xs i-check">
+                            <label> <input id="NI" type="checkbox" value=""> <i></i> No I </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label> <input id="87" type="checkbox" value=""> <i></i> All 87s </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label> <input id="patch" type="checkbox" value=""> <i></i> Patching </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label> <input id="broken" type="checkbox" value=""> <i></i> Broken </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var sJSON = "";
+
+    function RollResult(iNum, iSides) {
+        var iResult = 0;
+        for (var i = 0; i < iNum; i++)
+            iResult += Math.floor((Math.random() * iSides) + 1);
+        return iResult;
+    }
+
+    function LookupChart(sXPath, iIndex) {
+        const parsed = jsel(sJSON).select(sXPath);
+        return parsed[iIndex];
+    }
+
+    function ValueInRange(sValue, sRange) {
+        const iValue = parseInt(sValue);
+
+        if (sRange.indexOf(" or less") != -1) {
+            sRange = sRange.replace(" or less", "");
+            const iRange = parseInt(sRange);
+            if (iRange == iValue || iValue < iRange)
+                return true;
+            return false;
+        }
+        else if (sRange.indexOf("-") != -1) {
+            const sa = sRange.split("-");
+            const iLow = parseInt(sa[0]);
+            const iHigh = parseInt(sa[1]);
+            if (iValue == iLow || iValue == iHigh)
+                return true;
+            if (iValue > iLow && iValue < iHigh)
+                return true;
+            return false;
+        }
+        else if (sRange.indexOf("+") != -1) {
+            sRange = sRange.replace("+", "");
+            const iHigh = parseInt(sRange);
+            if (iValue == iHigh || iValue > iHigh)
+                return true;
+            return false;
+        }
+        else {
+            if (iValue == sRange)
+                return true;
+            return false;
+        }
+    }
+
+    function RefreshColumn() {
+        var s = "";
+        if ($("#radDeplete1").prop("checked"))
+            s = LookupChart("//Chart//Col", 2);
+        else if ($("#radDeplete2").prop("checked"))
+            s = LookupChart("//Chart//Col", 3);
+        else
+            s = LookupChart("//Chart//Col", 1);
+        s = s.replace("+", "");
+        const a = s.split(",");
+        const slide = $("#sliderCol").val() - 1;
+        $("#Columns").text("Column - " + a[slide]);
+    }
+
+    function RefreshRow() {
+        var idx = 1;
+        var parsed = jsel(sJSON).select("//Chart/Row");
+        $.each(parsed, function (i, field) {
+            const sVals = field.split(",");
+            const iRowValue = $("#sliderRow").val();
+            const iColValue = $("#sliderCol").val();
+            if (ValueInRange(iRowValue, sVals[iColValue - 1])) {
+                console.log(iRowValue + " was found in Row " + i + ", Column " + iColValue + ", range of " + sVals[iColValue - 1]);
+                ShowCRTResults(idx);
+            }
+            idx++;
+        });
+
+        $("#Rows").text("Rows - " + $("#sliderRow").val());
+    }
+
+    function FillGBoxSection(sBox, sLetter, sGroup) {
+        var sAll1 = "";
+        var sAll2 = "";
+        var sAll3 = "";
+        const FG = jsel(sJSON).select("//Results/" + sBox + "//" + sGroup);
+        $.each(FG, function (i, field) {
+            if (i == sLetter[1])
+                sAll1 = "A: " + field;
+            if (i == sLetter[2])
+                sAll2 = "<br>B: " + field;
+            if (i == sLetter[3])
+                sAll3 = "<br>C: " + field;
+        });
+        $("#" + sBox + sGroup).html(sAll1 + sAll2 + sAll3);
+    }
+
+    function FillBBoxSection(sBox, sLetter, sGroup) {
+        var sAll1 = "";
+        var sAll2 = "";
+        var sAll3 = "";
+        const FG = jsel(sJSON).select("//Results/" + sBox + "//" + sGroup);
+        $.each(FG, function (i, field) {
+            if (i == sLetter[4])
+                sAll1 = "A: " + field;
+            if (i == sLetter[5])
+                sAll2 = "<br>B: " + field;
+            if (i == sLetter[6])
+                sAll3 = "<br>C: " + field;
+        });
+        $("#" + sBox + sGroup).html(sAll1 + sAll2 + sAll3);
+    }
+
+    function FillBox(sBox, sResultLetters) {
+        const sCRT = sResultLetters.split(",");
+        FillGBoxSection("H", sCRT, "FG");
+        FillGBoxSection("H", sCRT, "RG");
+        FillBBoxSection("H", sCRT, "FS");
+        FillBBoxSection("H", sCRT, "RS");
+        FillGBoxSection("B", sCRT, "FG");
+        FillGBoxSection("B", sCRT, "RG");
+        FillBBoxSection("B", sCRT, "FS");
+        FillBBoxSection("B", sCRT, "RS");
+        FillGBoxSection("E", sCRT, "FG");
+        FillGBoxSection("E", sCRT, "RG");
+    }
+
+    function HandleBingBox() {
+        const iDice = RollResult(1, 6);
+        var cols = jsel(sJSON).select("//Results/@BBoxCol");
+        const vA = cols.split(",");
+        const iColValue = +$("#sliderBing").val();
+        var iShiftedValue = +iColValue;
+        if ($("#NI").prop("checked"))
+            iShiftedValue += 2;
+        if ($("#87").prop("checked"))
+            iShiftedValue += 2;
+        if ($("#patch").prop("checked"))
+            iShiftedValue--;
+        if ($("#broken").prop("checked"))
+            iShiftedValue += 2;
+
+        if (iShiftedValue > +iColValue + +3)
+            iShiftedValue = +iColValue + +3;
+        if (iShiftedValue < +iColValue - +3)
+            iShiftedValue = +iColValue - +3;
+        if (iShiftedValue < 1)
+            iShiftedValue = 1;
+        if (iShiftedValue > 12)
+            iShiftedValue = 12;
+
+        if (+iShiftedValue !== +iColValue)
+            $("#Bing").text("Bing: ");
+    }
+
+    function ShowCRTResults(iRowIndex) {
+        iDice = RollResult(1, 6);
+        var crtResult = jsel(sJSON).select("//Chart/CRT/*[" + iRowIndex + "]");
+        var sCRTResult = crtResult[iDice - 1];
+        console.log("Results (Dice " + iDice + ") = " + sCRTResult);
+        FillBox("H", sCRTResult);
+    }
+
+    $(function () {
+
+        $.getJSON("./raf.json", function (data) {
+            sJSON = data;
+        })
+
+    });
+</script>
+
+</body>
+</html>
