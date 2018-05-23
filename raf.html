@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <script src="js/jsel.js"></script>
-    <script type="application/json" src="raf.json"></script>
     <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -28,22 +27,22 @@
                 <div class="ibox-content">
                     <div class="row white-bg">
                         <div class="col-sm-4 m-b-xs">
-                            <strong><span style="color: darkgreen">Good Condition</span></strong>
                             <input type="radio" checked="checked" value="0" id="radGreen" name="optionsRadios">
+                            <strong><span style="color: darkgreen">Good Condition</span></strong>
                         </div>
                         <div class="col-sm-4 m-b-xs">
-                            <span style="color: maroon">Deplete 1</span>
                             <input type="radio" value="1" id="radDeplete1" name="optionsRadios">
+                            <span style="color: maroon">Deplete 1</span>
                         </div>
                         <div class="col-sm-4 m-b-xs">
-                            <span style="color: maroon">Deplete 2</span>
                             <input type="radio" value="2" id="radDeplete2" name="optionsRadios">
+                            <span style="color: maroon">Deplete 2</span>
                         </div>
                     </div>
                     <p/>
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
-                            <strong><span id="Columns">Column - 2</span></strong>
+                            <strong><span id="Columns">Gruppen in Combat - 2</span></strong>
                             <input id="sliderCol" type="range" min="1" max="12" step="1" value="4"
                                    onchange="RefreshColumn();"/>
                         </div>
@@ -51,7 +50,7 @@
                     <p/>
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
-                            <strong><span id="Rows">Row - ??</span></strong>
+                            <strong><span id="Rows">Total Combat Value - ??</span></strong>
                             <input id="sliderRow" type="range" min="-1" max="76" step="1" value=""
                                    onchange="RefreshRow();"/>
                         </div>
@@ -63,7 +62,7 @@
                 <div class="ibox-title">
                     <div class="row white-bg">
                         <div class="col-sm-6 m-b-xs">
-                            <h5>Grupen in Hunt Box</h5>
+                            <h5>Gruppen in Hunt Box</h5>
                         </div>
                         <div class="col-sm-6 m-b-xs">
                             <h5>Squadron in Hunt Box</h5>
@@ -92,7 +91,7 @@
                 <div class="ibox-title">
                     <div class="row white-bg">
                         <div class="col-sm-6 m-b-xs">
-                            <h5>Grupen in Bomb Box</h5>
+                            <h5>Gruppen in Bomb Box</h5>
                         </div>
                         <div class="col-sm-6 m-b-xs">
                             <h5>Squadron in Bomb Box</h5>
@@ -121,7 +120,7 @@
                 <div class="ibox-title">
                     <div class="row white-bg">
                         <div class="col-sm-6 m-b-xs">
-                            <h5>Grupen in Escort</h5>
+                            <h5>Gruppen in Escort</h5>
                         </div>
                     </div>
                 </div>
@@ -232,7 +231,7 @@
         s = s.replace("+", "");
         const a = s.split(",");
         const slide = $("#sliderCol").val() - 1;
-        $("#Columns").text("Column - " + a[slide]);
+        $("#Columns").text("Gruppen in Combat - " + a[slide]);
     }
 
     function RefreshRow() {
@@ -249,7 +248,7 @@
             idx++;
         });
 
-        $("#Rows").text("Rows - " + $("#sliderRow").val());
+        $("#Rows").text("Total Combat Value - " + $("#sliderRow").val());
     }
 
     function FillGBoxSection(sBox, sLetter, sGroup) {
