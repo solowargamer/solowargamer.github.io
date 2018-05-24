@@ -59,15 +59,15 @@
                 <div class="ibox-content">
                     <div class="row white-bg">
                         <div class="col-sm-4 m-b-xs">
-                            <input type="radio" checked="checked" value="0" id="radGreen" name="optionsRadios">
+                            <input type="radio" checked="checked" value="0" id="radGreen" name="optionsRadios" oninput="RefreshAll();">
                             <strong><span style="color: darkgreen">Good Condition</span></strong>
                         </div>
                         <div class="col-sm-4 m-b-xs">
-                            <input type="radio" value="1" id="radDeplete1" name="optionsRadios">
+                            <input type="radio" value="1" id="radDeplete1" name="optionsRadios" oninput="RefreshAll();">
                             <span style="color: maroon">Deplete 1</span>
                         </div>
                         <div class="col-sm-4 m-b-xs">
-                            <input type="radio" value="2" id="radDeplete2" name="optionsRadios">
+                            <input type="radio" value="2" id="radDeplete2" name="optionsRadios" oninput="RefreshAll();">
                             <span style="color: maroon">Deplete 2</span>
                         </div>
                     </div>
@@ -76,15 +76,15 @@
                         <div class="col-sm-12 m-b-xs">
                             <strong><span id="Columns">Gruppen in Combat - 2</span></strong>
                             <input class="slider-square" id="sliderCol" type="range" min="1" max="12" step="1" value="4"
-                                   onchange="RefreshColumn();"/>
+                                   oninput="RefreshAll();"/>
                         </div>
                     </div>
                     <p/>
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
-                            <strong><span id="Rows">Total Combat Value - ??</span></strong>
-                            <input class="slider-square" id="sliderRow" type="range" min="-1" max="76" step="1" value=""
-                                   onchange="RefreshRow();"/>
+                            <strong><span id="Rows">Total Combat Value - 20</span></strong>
+                            <input class="slider-square" id="sliderRow" type="range" min="-1" max="76" step="1" value="20"
+                                   oninput="RefreshAll();"/>
                         </div>
                     </div>
                 </div>
@@ -206,6 +206,11 @@
 <script>
     var sJSON = "";
 
+    function  RefreshAll()
+    {
+        RefreshRow();
+    }
+    
     function RollResult(iNum, iSides) {
         var iResult = 0;
         for (var i = 0; i < iNum; i++)
