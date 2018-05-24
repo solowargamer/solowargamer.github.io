@@ -193,6 +193,10 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <label> <input id="broken" type="checkbox" value=""> <i></i> Broken Clouds </label>
                         </div>
+                        <p />
+                        <div class="col-sm-12 m-b-xs">
+                            <strong><span id="BingResult">Results - </span></strong>                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -337,7 +341,7 @@
 
     function HandleBingBox() {
         const iDice = RollResult(1, 6);
-        var cols = jsel(sJSON).select("//Results/@BBoxCol");
+        const cols = jsel(sJSON).select("//Results/@BBoxCol");
         const vA = cols.split(",");
         const iColValue = +$("#sliderBing").val();
         var iShiftedValue = +iColValue;
@@ -359,10 +363,17 @@
         if (iShiftedValue > 12)
             iShiftedValue = 12;
 
-        if (+iShiftedValue !== +iColValue)
+        const bresult = jsel(sJSON).select("//Results/@BBoxData");
+        const vB = bresult.split(",");
+
+        if (+iShiftedValue !== +iColValue){
             $("#Bing").text("Bombers: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
-        else
+            $("#BingResult").text("Results - " + vA[iShiftedValue-1]);
+        }
+        else{
             $("#Bing").text("Bombers: " + vA[iColValue-1]);
+            $("#BingResult").text("Results - " + vA[iColValue-1]);
+        }
     }
 
     function ShowCRTResults(iRowIndex) {
