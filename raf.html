@@ -9,6 +9,38 @@
 
     <script src="js/jsel.js"></script>
     <link href="css/style.css" rel="stylesheet"/>
+    
+    <style>
+        .slider-square {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 24px;
+  background: #d3d3d3;
+  outline: none;
+  opacity:0.7;
+  -webkit-transition: opacity .15s ease-in-out;
+  transition: opacity .15s ease-in-out;
+}
+.slider-square:hover {
+  opacity:1;
+}
+.slider-square::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.slider-square::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: #4CAF50;
+  cursor: pointer;
+}
+    </style>
+    
 </head>
 <body>
 <div class="wrapper wrapper-content gray-bg">
@@ -43,7 +75,7 @@
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
                             <strong><span id="Columns">Gruppen in Combat - 2</span></strong>
-                            <input id="sliderCol" type="range" min="1" max="12" step="1" value="4"
+                            <input class="slider-square" id="sliderCol" type="range" min="1" max="12" step="1" value="4"
                                    onchange="RefreshColumn();"/>
                         </div>
                     </div>
@@ -51,7 +83,7 @@
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
                             <strong><span id="Rows">Total Combat Value - ??</span></strong>
-                            <input id="sliderRow" type="range" min="-1" max="76" step="1" value=""
+                            <input class="slider-square" id="sliderRow" type="range" min="-1" max="76" step="1" value=""
                                    onchange="RefreshRow();"/>
                         </div>
                     </div>
@@ -148,7 +180,7 @@
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
                             <strong><span id="Bing">Row - ??</span></strong>
-                            <input id="sliderBing" type="range" min="1" max="12" step="1" value=""
+                            <input class="slider-square" id="sliderBing" type="range" min="1" max="12" step="1" value=""
                                    onchange="HandleBingBox()"/>
                             <P/>
                         </div>
