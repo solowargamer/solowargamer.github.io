@@ -359,9 +359,9 @@
             iShiftedValue = 12;
 
         if (+iShiftedValue !== +iColValue)
-            $("#Bing").text("Bombers: " + vA[iColValue] + " (shifted value: " + vA[iShiftedValue] + ")");
+            $("#Bing").text("Bombers: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
         else
-            $("#Bing").text("Bombers: " + vA[iColValue]);
+            $("#Bing").text("Bombers: " + vA[iColValue-1]);
     }
 
     function ShowCRTResults(iRowIndex) {
