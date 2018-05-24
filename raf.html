@@ -363,16 +363,16 @@
         if (iShiftedValue > 12)
             iShiftedValue = 12;
 
-        const bresult = jsel(sJSON).select("//Results/@BBoxData");
+        const bresult = jsel(sJSON).select("//Results/BBoxData/*[" + iDice + "]");
         const vB = bresult.split(",");
 
         if (+iShiftedValue !== +iColValue){
             $("#Bing").text("Bombers: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
-            $("#BingResult").text("Results - " + vA[iShiftedValue-1]);
+            $("#BingResult").text("Results - " + vB[iShiftedValue-1]);
         }
         else{
             $("#Bing").text("Bombers: " + vA[iColValue-1]);
-            $("#BingResult").text("Results - " + vA[iColValue-1]);
+            $("#BingResult").text("Results - " + vB[iColValue-1]);
         }
     }
 
