@@ -185,13 +185,13 @@
                             <P/>
                         </div>
                         <div class="col-sm-12 m-b-xs i-check">
-                            <label> <input id="NI" type="checkbox" value=""> <i></i> No I </label>
+                            <label> <input id="NI" type="checkbox" value=""> <i></i> No Intercepts </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="87" type="checkbox" value=""> <i></i> All 87s </label>
+                            <label> <input id="87" type="checkbox" value=""> <i></i> All ju87s </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="patch" type="checkbox" value=""> <i></i> Patching </label>
+                            <label> <input id="patch" type="checkbox" value=""> <i></i> Patchy Clouds </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="broken" type="checkbox" value=""> <i></i> Broken </label>
+                            <label> <input id="broken" type="checkbox" value=""> <i></i> Broken Clouds </label>
                         </div>
                     </div>
                 </div>
@@ -359,7 +359,9 @@
             iShiftedValue = 12;
 
         if (+iShiftedValue !== +iColValue)
-            $("#Bing").text("Bing: ");
+            $("#Bing").text("Bombers: " + vA[iColValue] + " (shifted value: " + vA[iShiftedValue] + ")");
+        else
+            $("#Bing").text("Bombers: " + vA[iColValue]);
     }
 
     function ShowCRTResults(iRowIndex) {
