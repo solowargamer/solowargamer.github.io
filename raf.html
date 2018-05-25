@@ -365,7 +365,7 @@
         if (iShiftedValue > 12)
             iShiftedValue = 12;
 
-        const bresult = jsel(sJSON).select("//Results//BBoxData/");
+        const bresult = jsel(sJSON).select("//Results//BBoxData");
         $.each(bresult, function (i, field) {
             if (+i == +iDice){
                 vB = field.split(",");
