@@ -340,6 +340,8 @@
     }
 
     function HandleBingBox() {
+        var vB = "";
+        
         const iDice = RollResult(1, 6);
         const cols = jsel(sJSON).select("//Results/@BBoxCol");
         const vA = cols.split(",");
@@ -363,8 +365,12 @@
         if (iShiftedValue > 12)
             iShiftedValue = 12;
 
-        const bresult = jsel(sJSON).select("//Results/BBoxData/*[" + iDice + "]");
-        const vB = bresult.split(",");
+        const bresult = jsel(sJSON).select("//Results//BBoxData/");
+        $.each(bresult, function (i, field) {
+            if (+i == +iDice){
+                vB = field.split(",");
+            }
+        });
 
         if (+iShiftedValue !== +iColValue){
             $("#Bing").text("Bombers: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
