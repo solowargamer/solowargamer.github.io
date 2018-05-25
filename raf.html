@@ -179,12 +179,12 @@
                 <div class="ibox-content">
                     <div class="row white-bg">
                         <div class="col-sm-12 m-b-xs">
-                            <strong><span id="Bing">Row - ??</span></strong>
+                            <h2><strong><span id="Bing">Bombing Strength: ??</span></strong></h2>
                             <input class="slider-square" id="sliderBing" type="range" min="1" max="12" step="1" value=""
                                    onchange="HandleBingBox()"/>
-                            <P/>
+                            <p />
                         </div>
-                        <div class="col-sm-12 m-b-xs i-check">
+                        <h2><div class="col-sm-12 m-b-xs i-check">
                             <label> <input id="NI" type="checkbox" value=""> <i></i> No Intercepts </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <label> <input id="87" type="checkbox" value=""> <i></i> All ju87s </label>
@@ -192,10 +192,10 @@
                             <label> <input id="patch" type="checkbox" value=""> <i></i> Patchy Clouds </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <label> <input id="broken" type="checkbox" value=""> <i></i> Broken Clouds </label>
-                        </div>
+                        </div></h2>
                         <p />
                         <div class="col-sm-12 m-b-xs">
-                            <strong><span id="BingResult">Results - </span></strong>                            
+                            <h2><strong><span id="BingResult">Results - </span></strong></h2>                          
                         </div>
                     </div>
                 </div>
@@ -373,11 +373,11 @@
         });
 
         if (+iShiftedValue !== +iColValue){
-            $("#Bing").text("Bombers: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
+            $("#Bing").text("Bombing Strength: " + vA[iColValue-1] + " (shifted value: " + vA[iShiftedValue-1] + ")");
             $("#BingResult").text("Results - " + vB[iShiftedValue-1]);
         }
         else{
-            $("#Bing").text("Bombers: " + vA[iColValue-1]);
+            $("#Bing").text("Bombing Strength: " + vA[iColValue-1]);
             $("#BingResult").text("Results - " + vB[iColValue-1]);
         }
     }
