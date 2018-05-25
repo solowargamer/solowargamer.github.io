@@ -181,17 +181,17 @@
                         <div class="col-sm-12 m-b-xs">
                             <h2><strong><span id="Bing">Bombing Strength: ??</span></strong></h2>
                             <input class="slider-square" id="sliderBing" type="range" min="1" max="12" step="1" value=""
-                                   onchange="HandleBingBox()"/>
+                                   oninput="HandleBingBox()"/>
                             <p />
                         </div>
                         <h2><div class="col-sm-12 m-b-xs i-check">
-                            <label> <input id="NI" type="checkbox" value=""> <i></i> No Intercepts </label>
+                            <label> <input id="NI" type="checkbox" value="" onchange="HandleBingBox()"> <i></i> No Intercepts </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="87" type="checkbox" value=""> <i></i> All ju87s </label>
+                            <label> <input id="87" type="checkbox" value="" onchange="HandleBingBox()"> <i></i> All ju87s </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="patch" type="checkbox" value=""> <i></i> Patchy Clouds </label>
+                            <label> <input id="patch" type="checkbox" value="" onchange="HandleBingBox()"> <i></i> Patchy Clouds </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label> <input id="broken" type="checkbox" value=""> <i></i> Broken Clouds </label>
+                            <label> <input id="broken" type="checkbox" value="" onchange="HandleBingBox()"> <i></i> Broken Clouds </label>
                         </div></h2>
                         <p />
                         <div class="col-sm-12 m-b-xs">
