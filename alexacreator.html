@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Alexa Application Creator</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <script src="js/jsel.js"></script>
+    <link href="css/style.css" rel="stylesheet"/>
+    <head>
+<body>
+
+<header class="d-flex flex-column flex-md-row align-items-md-center p-3 bg-light">
+    <div class="pt-md-3 pb-md-4">
+        <h1 class="bd-title mt-0">Board Game Voice Creator</h1>
+        <p class="bd-lead">This Javascript will convert plain text rulesets to a simple Alexa application.</p>
+        <a href="https://solowargamer.github.io/upload_this_package.zip" class="btn btn-lg btn-bd-primary">Download node
+            modules for upgrading version to 2.x</a>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-sm-1 col-md-1 col-xl-1 mb-1">
+        &nbsp;
+    </div>
+    <div class="col-sm-8 col-md-8 col-xl-8 mb-8">
+
+        <p/><br/>
+        <p/>
+        <h4 class="mb-3 bd-text-purple-bright">Enter your rules here:</h4>
+
+        <textarea ID="rules" rows="6" cols="100" placeholder="
+!rulenameone
+string to search one
+string to search two
+string to search three
+=Final things to say for rule 1
+
+!rulenametwo
+string to search four
+string to search five
+string to search six
+=Final things to say for rule 2
+
+!rulenamethree
+string to search six
+string to search seven
+string to search eight
+=Final things to say for rule 3
+">
+</textarea>
+
+        <p class="bd-lead">
+            <strong>Format:</strong><p/>
+        <strong>!</strong>RuleName<br/>
+            Something the user will say to search for this rule<br/>
+            <strong>=</strong>The actual rule text goes here
+        </p>
+
+        <p/><br/>
+        <p/>
+        <h4 class="mb-3 bd-text-purple-bright">This is your code for Skills:</h4>
+
+        <textarea ID="skillsFinal" rows="4" cols="100">
+</textarea>
+
+        <p/><br/>
+        <p/>
+        <h4 class="mb-3 bd-text-purple-bright">Your Javascript code for Lambda function:</h4>
+
+        <textarea ID="lambdaFinal" rows="4" cols="100">
+</textarea>
+
+        <p/><br/>
+        <p/>
+        <input type="button" value="Generate Skills and Lambda Code"
+               class="btn btn-lg btn-bd-primary mb-3 mb-md-0 mr-md-3" onclick="CreateAlexa();">
+
+    </div>
+</div>
+
+    <textarea ID="lambdaText" style="display:none;" rows="4" cols="50">
+    const Alexa = require('ask-sdk-core');
+const i18n = require('i18next');
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  BEGIN GENERIC TEXT HANDLING =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+%LAMBDA_REPLACE%
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  END GENERIC TEXT HANDLING =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+const StartAttackHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'StartAttack';
+    },
+    async handle(handlerInput) {
+
+        const attributesManager = handlerInput.attributesManager;
+        const attack = handlerInput.requestEnvelope.request.intent.slots.firepower.value;
+        const defend = handlerInput.requestEnvelope.request.intent.slots.morale.value;
+
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        sessionAttributes.attackerTotal = attack;
+        sessionAttributes.defenderTotal = defend;
+        attributesManager.setSessionAttributes(sessionAttributes);
+
+        let responseString = 'Attacking with ' + attack.toString() + ' fire power against ' + defend.toString() + ' morale ';
+
+        if (attack > defend)
+            responseString = 'This looks promising for the attacker, what cards did you pull?';
+        else if (defend > attack)
+            responseString = 'Defender will be tough to beat.  Please pull the cards, and tell me what you drew';
+        else if (defend === attack)
+            responseString = 'Equal odds?  This will be a close match.  Please pull the cards, and tell me what you drew';
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const DiceRollHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'DiceRoll';
+    },
+    handle(handlerInput) {
+
+        const dice = handlerInput.requestEnvelope.request.intent.slots.dice.value;
+        let responseString = `<speak> <audio src="soundbank://soundlibrary/office/amzn_sfx_typing_short_02"/>
+    You rolled ` + dice.toString() + ` dice. `;
+        var diceResult = 0;
+        for (var i = 0; i < parseInt(dice); i++){
+            const diceRoll = Math.floor(Math.random() * 6) + 1;
+            diceResult += diceRoll;
+            responseString = responseString + diceRoll.toString() + ' <break time="300ms"/> ';
+        }
+        responseString = responseString + ' totalling ' + diceResult + ' </speak>';
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CombatRollHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'AttackDefendRolls';
+    },
+    handle(handlerInput) {
+        let responseString = 'inside attack Roll Handler';
+
+        const attributesManager = handlerInput.attributesManager;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const attack = handlerInput.requestEnvelope.request.intent.slots.attackRoll.value;
+        const defend = handlerInput.requestEnvelope.request.intent.slots.defendRoll.value;
+
+        const attackValue = parseInt(sessionAttributes.attackerTotal) + parseInt(attack);
+        const defenseValue = parseInt(sessionAttributes.defenderTotal) + parseInt(defend);
+        try {
+            if (attackValue > defenseValue)
+                responseString = 'Attacker defeated the defender, ' + attackValue.toString() + ' versus ' + defenseValue.toString();
+            else if (defenseValue > attackValue)
+                responseString = 'Defender is unharmed, ' + attackValue.toString() + ' attack does not beat ' + defenseValue.toString() + ' defense';
+            else if (defenseValue === attackValue)
+                responseString = 'Attacker and Defender are tied!  Place a suppressed marker';
+        }
+        catch (error) {
+            console.log(`Intent: ${handlerInput.requestEnvelope.request.intent.name}: message: ${error.message}`);
+        }
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CallingAirSupportHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'CallingAirSupport';
+    },
+    handle(handlerInput) {
+        const speechText = `<speak> Air support is on the way
+    <audio src="soundbank://soundlibrary/transportation/amzn_sfx_airplane_takeoff_whoosh_01"/> </speak> `;
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .speak(`<speak> <audio
+            src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01'/>
+      Welcome.  Say CANCEL to exit this application. </speak>`)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+
+        return handlerInput.responseBuilder
+            .speak('Say any question from the game, for example whats on these cards, or how many victory points for a defeated unit.  Say CANCEL to exit this application.')
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CancelAndStopIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
+                handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+    },
+    handle(handlerInput) {
+        const speechText = 'Goodbye!';
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .getResponse();
+    },
+};
+
+const SessionEndedRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+    },
+    handle(handlerInput) {
+        console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
+
+        return handlerInput.responseBuilder.getResponse();
+    },
+};
+
+const ErrorHandler = {
+    canHandle() {
+        return true;
+    },
+    handle(handlerInput, error) {
+        console.log(`Error handled: ${error.message}`);
+
+        return handlerInput.responseBuilder
+            .speak('')
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const skillBuilder = Alexa.SkillBuilders.custom();
+
+exports.handler = skillBuilder
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        DiceRollHandler,
+        CombatRollHandler,
+        StartAttackHandler,
+
+        %LAMBDA_HANDLERS%
+
+        CallingAirSupportHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
+</textarea>
+
+
+    <script>
+
+        function CreateAlexa() {
+
+            /* Created by Mitch Ashford, December 2018 */
+
+            const skillTemplate = `
+        {
+          "name": "%SKILLNAME%",
+          "slots": [],
+          "samples": [
+            %SAMPLES%
+          ]
+        },
+`;
+
+            const lambdaTemplate = `
+const %LAMBDA_NAME%Handler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === '%LAMBDA_NAME%';
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder.speak('%RESPONSE%').withShouldEndSession(false).getResponse();
+    },
+};
+`;
+
+            const skillsText = `
+    {
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "great war commander",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "CallingAirSupport",
+          "slots": [],
+          "samples": [
+            "air support",
+            "calling in air support"
+          ]
+        },
+
+%SKILLS_REPLACE%
+
+        {
+          "name": "StartAttack",
+          "slots": [
+            {
+              "name": "firepower",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "morale",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Attacking with {firepower} against {morale} defense",
+            "Attacking with {firepower} fire power against {morale} defense",
+            "Attacking with {firepower} fire power against {morale} morale",
+            "I'm attacking with {firepower} fire power. Defender has {morale} morale"
+          ]
+        },
+        {
+          "name": "AttackDefendRolls",
+          "slots": [
+            {
+              "name": "attackRoll",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "defendRoll",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Attacker rolled a {attackRoll}  Defender rolled a {defendRoll}"
+          ]
+        },
+        {
+          "name": "DiceRoll",
+          "slots": [
+            {
+              "name": "dice",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "roll {dice} dice"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
+        `
+
+            // These characters are not allowed inside of Skill names
+            function ReplaceInvalidChars(sLine) {
+                sLine = sLine.replace('!', '').replace('<', '').replace('>', '').replace('&', '').replace('@', '').replace('?', '').replace("'", "").replace('"', '');
+                return sLine;
+            }
+
+            // Variables
+            var sSkills = skillTemplate;
+            var sLambdas = lambdaTemplate;
+            var sSkillName = '';
+            var sSamples = '';
+            var sFinalSkillString = '';
+            var sFinalLambdaString = '';
+            var sFinalLambdaHandlerString = '';
+
+            var textArea = document.getElementById("rules");
+            var lineArray = textArea.value.split('\n');
+            var iTotalLines = 0;
+
+            // When file is finished reading, process those lines
+            for (var val of lineArray) {
+                var newLine = val.trim();
+                // Found skill name
+                if (newLine.indexOf('!') > -1) {
+                    iTotalLines++;
+                    // Empty out samples variable
+                    sSamples = '';
+                    sSkills = skillTemplate;
+                    newLine = ReplaceInvalidChars(newLine).replace(' ', '');
+                    sSkillName = newLine;
+                    sFinalLambdaHandlerString = sFinalLambdaHandlerString + newLine + 'Handler,\r\n';
+                    sSkills = sSkills.replace('%SKILLNAME%', newLine);
+                }
+                // Rule answer spoken to the user
+                else if (newLine.indexOf('=') > -1) {
+                    iTotalLines++;
+                    newLine = ReplaceInvalidChars(newLine).replace('=', '');
+                    sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine);
+                    sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
+                    sFinalLambdaString = sFinalLambdaString + sLambdas + '\r\n';
+                    sFinalSkillString = sFinalSkillString + sSkills.replace('%SAMPLES%', sSamples);
+                }
+                // Key phrases to listen for
+                else if (newLine.length > 2) {
+                    iTotalLines++;
+                    newLine = ReplaceInvalidChars(newLine).replace(',', '').replace('.', '');
+                    if (sSamples != '')
+                        sSamples = sSamples + ',"' + newLine + '"\r\n';
+                    else
+                        sSamples = '"' + newLine + '"\r\n';
+                } else {
+                }
+            }
+
+            var sK = skillsText.replace('%SKILLS_REPLACE%', sFinalSkillString);
+            console.log(sK);
+            document.getElementById("skillsFinal").value = sK;
+
+            var sT = document.getElementById("lambdaText").value;
+            sT = sT.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString);
+            console.log(sT);
+            document.getElementById("lambdaFinal").value = sT;
+
+            //console.log(sFinalSkillString);
+            //console.log(sFinalLambdaString);
+            //console.log(sFinalLambdaHandlerString);
+        }
+
+    </script>
+
+</body>
