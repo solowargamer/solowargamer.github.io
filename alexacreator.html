@@ -114,7 +114,8 @@ const %LAMBDA_NAME%Handler = {
     handle(handlerInput) {
         return handlerInput.responseBuilder.speak('%RESPONSE%')
          .withShouldEndSession(false)
-         .withSimpleCard('%LAMBDA_NAME%','%LAMBDA_NAME%').getResponse();
+         .withSimpleCard('%LAMBDA_NAME%','%LAMBDA_NAME%')
+         .getResponse();
     },
 };
 `;
@@ -158,8 +159,8 @@ const %LAMBDA_NAME%Handler = {
             else if (newLine.indexOf('=') > -1) {
                 iTotalLines++;
                 newLine = ReplaceInvalidChars(newLine).replace('=', '');
-                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine).replace('%LAMBDA_NAME%', newLine);
-                sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
+                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine).replace('%RESPONSE%', newLine);
+                sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
                 sFinalLambdaString = sFinalLambdaString + sLambdas + '\r\n';
                 sFinalSkillString = sFinalSkillString + sSkills.replace('%SAMPLES%', sSamples);
             }
@@ -174,17 +175,6 @@ const %LAMBDA_NAME%Handler = {
             } else {
             }
         }
-
-/*
-        var sK = skillsText.replace('%SKILLS_REPLACE%', sFinalSkillString);
-        console.log(sK);
-        document.getElementById("skillsFinal").value = sK;
-
-        var sT = document.getElementById("lambdaText").value;
-        sT = sT.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString);
-        console.log(sT);
-        document.getElementById("lambdaFinal").value = sT;
-*/
 
         var importFileSkills = "";
         var importFileLambda = "";
