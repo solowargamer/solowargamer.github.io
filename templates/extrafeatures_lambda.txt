@@ -1,0 +1,199 @@
+const Alexa = require('ask-sdk-core');
+const i18n = require('i18next');
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  BEGIN GENERIC TEXT HANDLING =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+%LAMBDA_REPLACE%
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  END GENERIC TEXT HANDLING =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+const StartAttackHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'StartAttack';
+    },
+    async handle(handlerInput) {
+
+        const attributesManager = handlerInput.attributesManager;
+        const attack = handlerInput.requestEnvelope.request.intent.slots.firepower.value;
+        const defend = handlerInput.requestEnvelope.request.intent.slots.morale.value;
+
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        sessionAttributes.attackerTotal = attack;
+        sessionAttributes.defenderTotal = defend;
+        attributesManager.setSessionAttributes(sessionAttributes);
+
+        let responseString = 'Attacking with ' + attack.toString() + ' fire power against ' + defend.toString() + ' morale ';
+
+        if (attack > defend)
+            responseString = 'This looks promising for the attacker, what cards did you pull?';
+        else if (defend > attack)
+            responseString = 'Defender will be tough to beat.  Please pull the cards, and tell me what you drew';
+        else if (defend === attack)
+            responseString = 'Equal odds?  This will be a close match.  Please pull the cards, and tell me what you drew';
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const DiceRollHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'DiceRoll';
+    },
+    handle(handlerInput) {
+
+        const dice = handlerInput.requestEnvelope.request.intent.slots.dice.value;
+        let responseString = `<speak> <audio src="soundbank://soundlibrary/office/amzn_sfx_typing_short_02"/>
+    You rolled ` + dice.toString() + ` dice. `;
+        var diceResult = 0;
+        for (var i = 0; i < parseInt(dice); i++){
+            const diceRoll = Math.floor(Math.random() * 6) + 1;
+            diceResult += diceRoll;
+            responseString = responseString + diceRoll.toString() + ' <break time="300ms"/> ';
+        }
+        responseString = responseString + ' totalling ' + diceResult + ' </speak>';
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CombatRollHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'AttackDefendRolls';
+    },
+    handle(handlerInput) {
+        let responseString = 'inside attack Roll Handler';
+
+        const attributesManager = handlerInput.attributesManager;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const attack = handlerInput.requestEnvelope.request.intent.slots.attackRoll.value;
+        const defend = handlerInput.requestEnvelope.request.intent.slots.defendRoll.value;
+
+        const attackValue = parseInt(sessionAttributes.attackerTotal) + parseInt(attack);
+        const defenseValue = parseInt(sessionAttributes.defenderTotal) + parseInt(defend);
+        try {
+            if (attackValue > defenseValue)
+                responseString = 'Attacker defeated the defender, ' + attackValue.toString() + ' versus ' + defenseValue.toString();
+            else if (defenseValue > attackValue)
+                responseString = 'Defender is unharmed, ' + attackValue.toString() + ' attack does not beat ' + defenseValue.toString() + ' defense';
+            else if (defenseValue === attackValue)
+                responseString = 'Attacker and Defender are tied!  Place a suppressed marker';
+        }
+        catch (error) {
+            console.log(`Intent: ${handlerInput.requestEnvelope.request.intent.name}: message: ${error.message}`);
+        }
+
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CallingAirSupportHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === 'CallingAirSupport';
+    },
+    handle(handlerInput) {
+        const speechText = `<speak> Air support is on the way
+    <audio src="soundbank://soundlibrary/transportation/amzn_sfx_airplane_takeoff_whoosh_01"/> </speak> `;
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .speak(`<speak> <audio
+            src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01'/>
+      Welcome.  Say CANCEL to exit this application. </speak>`)
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+
+        return handlerInput.responseBuilder
+            .speak('Say any question from the game, for example whats on these cards, or how many victory points for a defeated unit.  Say CANCEL to exit this application.')
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const CancelAndStopIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
+                handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+    },
+    handle(handlerInput) {
+        const speechText = 'Goodbye!';
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .getResponse();
+    },
+};
+
+const SessionEndedRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+    },
+    handle(handlerInput) {
+        console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
+
+        return handlerInput.responseBuilder.getResponse();
+    },
+};
+
+const ErrorHandler = {
+    canHandle() {
+        return true;
+    },
+    handle(handlerInput, error) {
+        console.log(`Error handled: ${error.message}`);
+
+        return handlerInput.responseBuilder
+            .speak('')
+            .withShouldEndSession(false)
+            .getResponse();
+    },
+};
+
+const skillBuilder = Alexa.SkillBuilders.custom();
+
+exports.handler = skillBuilder
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        DiceRollHandler,
+        CombatRollHandler,
+        StartAttackHandler,
+
+        %LAMBDA_HANDLERS%
+
+        CallingAirSupportHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();

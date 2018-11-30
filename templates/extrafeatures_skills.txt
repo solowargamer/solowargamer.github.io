@@ -1,0 +1,96 @@
+    {
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "great war commander",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "CallingAirSupport",
+          "slots": [],
+          "samples": [
+            "air support",
+            "calling in air support"
+          ]
+        },
+
+%SKILLS_REPLACE%
+
+        {
+          "name": "StartAttack",
+          "slots": [
+            {
+              "name": "firepower",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "morale",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Attacking with {firepower} against {morale} defense",
+            "Attacking with {firepower} fire power against {morale} defense",
+            "Attacking with {firepower} fire power against {morale} morale",
+            "I'm attacking with {firepower} fire power. Defender has {morale} morale"
+          ]
+        },
+        {
+          "name": "AttackDefendRolls",
+          "slots": [
+            {
+              "name": "attackRoll",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "defendRoll",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "Attacker rolled a {attackRoll}  Defender rolled a {defendRoll}"
+          ]
+        },
+        {
+          "name": "DiceRoll",
+          "slots": [
+            {
+              "name": "dice",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "roll {dice} dice"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
