@@ -158,7 +158,7 @@ const %LAMBDA_NAME%Handler = {
             else if (newLine.indexOf('=') > -1) {
                 iTotalLines++;
                 newLine = ReplaceInvalidChars(newLine).replace('=', '');
-                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine).replace('%RESPONSE%', newLine);
+                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine).replace('%LAMBDA_NAME%', newLine);
                 sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
                 sFinalLambdaString = sFinalLambdaString + sLambdas + '\r\n';
                 sFinalSkillString = sFinalSkillString + sSkills.replace('%SAMPLES%', sSamples);
