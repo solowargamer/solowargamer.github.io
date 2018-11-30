@@ -222,7 +222,7 @@ const %LAMBDA_NAME%Handler = {
             'url': importFileLambda,
             'dataType': "text",
             'success': function (data) {
-                vLA = data.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString);
+                vLA = data.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString).replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_REPLACE%', sFinalLambdaString);
             }
         });
 
