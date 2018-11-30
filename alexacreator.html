@@ -112,7 +112,9 @@ const %LAMBDA_NAME%Handler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === '%LAMBDA_NAME%';
     },
     handle(handlerInput) {
-        return handlerInput.responseBuilder.speak('%RESPONSE%').withShouldEndSession(false).withSimpleCard('%LAMBDA_NAME%','%RESPONSE%').getResponse();
+        return handlerInput.responseBuilder.speak('%RESPONSE%')
+         .withShouldEndSession(false)
+         .withSimpleCard('%LAMBDA_NAME%','%LAMBDA_NAME%').getResponse();
     },
 };
 `;
