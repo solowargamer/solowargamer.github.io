@@ -1,7 +1,7 @@
     {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "great war commander",
+      "invocationName": "enter your invocation term here",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
