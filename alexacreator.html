@@ -112,7 +112,7 @@ const %LAMBDA_NAME%Handler = {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && handlerInput.requestEnvelope.request.intent.name === '%LAMBDA_NAME%';
     },
     handle(handlerInput) {
-        return handlerInput.responseBuilder.speak('%RESPONSE%').withShouldEndSession(false).getResponse();
+        return handlerInput.responseBuilder.speak('%RESPONSE%').withShouldEndSession(false).withSimpleCard('%LAMBDA_NAME%','%RESPONSE%').getResponse();
     },
 };
 `;
@@ -156,8 +156,8 @@ const %LAMBDA_NAME%Handler = {
             else if (newLine.indexOf('=') > -1) {
                 iTotalLines++;
                 newLine = ReplaceInvalidChars(newLine).replace('=', '');
-                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine);
-                sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
+                sLambdas = lambdaTemplate.replace('%RESPONSE%', newLine).replace('%RESPONSE%', newLine);
+                sLambdas = sLambdas.replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName).replace('%LAMBDA_NAME%', sSkillName);
                 sFinalLambdaString = sFinalLambdaString + sLambdas + '\r\n';
                 sFinalSkillString = sFinalSkillString + sSkills.replace('%SAMPLES%', sSamples);
             }
@@ -222,7 +222,7 @@ const %LAMBDA_NAME%Handler = {
             'url': importFileLambda,
             'dataType': "text",
             'success': function (data) {
-                vLA = data.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString).replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_REPLACE%', sFinalLambdaString);
+                vLA = data.replace('%LAMBDA_REPLACE%', sFinalLambdaString).replace('%LAMBDA_HANDLERS%', sFinalLambdaHandlerString);
             }
         });
 
