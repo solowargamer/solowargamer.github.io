@@ -1,0 +1,357 @@
+Action Cup
+Administration Phase
+Adverse Terrain
+Air Plane Arrow
+Blue And Black Arrow
+Blue And Black Circle
+Blue Arrow
+Blue Arrow With Plane
+Blue Bicep Marker
+Blue Circle With Letter
+Blue Commit Marker
+Blue Squares
+Building In A Square
+Building Red Square
+Building Symbol Red
+Can I Reserve Flags
+Can I Reserve Resources
+Can I Reserve Units
+China Country
+China Power
+Commitment Marker
+Control Of A Country
+Country Control
+Country Garrison
+Delay Box
+Dotted Map Area
+Effectiveness Track
+Factory And Name
+Factory Symbol
+Factory With Name
+Failed Political Action
+Failed Political Action Track
+Final Scroring
+Gain Flags
+Gray Marker With Effect
+Home Front Marker
+How Can I Transfer Resources
+How Many Spaces Can My Naval Units Move
+Limited Resource
+Map Connector
+Minor Army
+Natural Resource
+Neutral Cube
+Off Map Area
+Operation Green Arrow
+Operation With Green Arrow
+Order Of Play
+Political Display
+Power Flag
+Power Marker
+Power Status Card
+Production Phase
+Production Sequence
+Production Sites
+Provocation
+Ratio For Converting A Resource
+Red And White Circle
+Red Area With Delay
+Red Circle With R
+Red Fist Square
+Red Square With Building
+Red Square With Delay
+Remote Areas
+Reserve Track
+Resistance On Map
+Restricted Terrain
+Rough Map Area
+Shaded Square On Map
+Special Resources
+Square With Factory
+Square With Fist
+Square With Flag
+Square With Hammer
+Square With Shovel
+Square With Symbol
+Stability Track
+Sudden Death
+Sudden Death Marker
+Tell Me About China
+Tell Me About The Map
+Turn Track
+Uncontrolled Country
+Unit With Country Name
+Victory Point Track
+What Can I Hold In Reserve
+What Causes A Collapse
+What Causes A Collapse Procedure
+What Countries Are On The Map
+What Ends The Game
+What Happens After I Gain A Flag
+What Happens During A Surrender
+What Happens When I Provoke A Country
+What Happens When War Starts
+When Can I Convert Resources
+When Can I Interrupt
+When Can I Resolve A Flag
+When Can I Resolve A Unit
+When Can I Take Actions
+When Do I Get Flags
+When Do I Surrender
+When Does A Country Collapse
+When Does A War End
+When Does My Opponent
+When Does Production Happen
+When Does The Game End
+When Is The Action Phase
+When Is The Production Sequence
+Which Sections Are Ports
+White Square With Tools
+Who Can Collect Resources
+Who Can I Negotiate With
+Who Can Interrupt
+Who Can Transfer Resources
+Who Wins The Game
+Wood Cubes
+Wood Square
+Yellow Scale Marker
+
+How Do I _____________
+
+ ... Attack A Country
+ ... Break An Alliance
+ ... Declare War
+ ... Deploy My Units
+ ... Determine Combat Results
+ ... Determine Losses
+ ... End A War
+ ... Get Flags
+ ... Get More Flags
+ ... Get The Status Of A War
+ ... Increase Commitment
+ ... Join An Alliance
+ ... Negotiate
+ ... Perform A Collapse Procedure
+ ... Regroup
+ ... Resolve A Civil War
+ ... Resolve Combat
+ ... Start A War
+ ... Upgrade
+ ... Use Flags
+ ... Win
+
+How Do/Does  _____________ Work
+
+ ... A Collapse
+ ... A Political Action
+ ... A Stability Test
+ ... Action Cup
+ ... Action Phase
+ ... Administration Phase
+ ... Air Combat
+ ... Air Field
+ ... Air Movement
+ ... Air Operation Procedure
+ ... Air Range
+ ... Air Superiority
+ ... Area Control
+ ... Black Arrow
+ ... Breaking An Alliance
+ ... Builds
+ ... Chinese Civil War
+ ... Civil War
+ ... Civil War Crisis
+ ... Civil War Resolution
+ ... Coastal Area
+ ... Collapse Procedure
+ ... Collecting Resources
+ ... Colonies
+ ... Combat Sequence
+ ... Commitment
+ ... Communist Power
+ ... Construction
+ ... Convert Resources
+ ... Country Attacks
+ ... Declaration Of War
+ ... Democratic Power
+ ... Deployment
+ ... Diplomacy
+ ... Diplomatic Opportunity
+ ... Effectiveness Checks
+ ... Ending Wars
+ ... Exhaustion
+ ... Extended Range
+ ... Failed Attacks
+ ... Failed Political Action
+ ... Failed Political Actions
+ ... Fascist Power
+ ... Force Pool
+ ... Global War
+ ... Home Front
+ ... Idealogies
+ ... Interrupts
+ ... Joining An Alliance
+ ... Land Area
+ ... Land Combat
+ ... Land Movement
+ ... Land Operation Procedure
+ ... Limited War
+ ... Line Of Communications
+ ... Logistics Units
+ ... Losses
+ ... Maneuvers
+ ... Military Actions
+ ... Minor Army
+ ... Mixed Area
+ ... Movement
+ ... Naval Combat
+ ... Naval Movement
+ ... Naval Operation Procedure
+ ... Naval Range
+ ... Neutral Cube
+ ... Occupation Limits
+ ... Off Map Area
+ ... Operation Sequence
+ ... Operation Types
+ ... Order Of Play
+ ... Political Display
+ ... Power Marker
+ ... Power Status Card
+ ... Production
+ ... Production Sequence
+ ... Propaganda
+ ... Provocation
+ ... Regroup
+ ... Remote Area
+ ... Reserve
+ ... Resolving A Flag
+ ... Resolving A Unit
+ ... Resolving An Upgrade
+ ... Retreat
+ ... Sea Area
+ ... Stability
+ ... Stability Track
+ ... Starting War
+ ... Strategic Bombing
+ ... Subsequent Activation
+ ... Sudden Death
+ ... Supply
+ ... Surprise Attack
+ ... Surrender
+ ... Transfer Of Resources
+ ... Turn Track
+ ... War Offensives
+ ... War Status
+ ... White Cube
+
+
+What Is/Are _____________
+
+ ... A Collapse
+ ... A Effectiveness Check
+ ... A Political Action
+ ... Action Cup
+ ... Action Phase
+ ... Administration Phase
+ ... Air Combat
+ ... Air Field
+ ... Air Movement
+ ... Air Operation Procedure
+ ... Air Range
+ ... Air Superiority
+ ... Area Control
+ ... Black Arrow
+ ... Breaking An Alliance
+ ... Builds
+ ... Chinese Civil War
+ ... Civil War
+ ... Civil War Crisis
+ ... Civil War Resolution
+ ... Coastal Area
+ ... Collapse Procedure
+ ... Collecting Resources
+ ... Colonies
+ ... Combat Result
+ ... Combat Sequence
+ ... Commitment
+ ... Communist Power
+ ... Construction
+ ... Convert Resources
+ ... Declaration Of War
+ ... Democratic Power
+ ... Deployment
+ ... Diplomacy
+ ... Diplomatic Opportunity
+ ... Exhaustion
+ ... Extended Range
+ ... Failed Attack
+ ... Failed Political Actions
+ ... Fascist Power
+ ... Force Pool
+ ... Force Pools
+ ... Global War
+ ... Home Area
+ ... Home Front
+ ... Idealogies
+ ... Increase Commitment
+ ... Interrupts
+ ... Land Area
+ ... Land Combat
+ ... Land Movement
+ ... Land Operation Procedure
+ ... Limited War
+ ... Line Of Communications
+ ... Logistics Units
+ ... Losses
+ ... Maneuvers
+ ... Military Actions
+ ... Minor Army
+ ... Mixed Area
+ ... Movement
+ ... Naval Combat
+ ... Naval Movement
+ ... Naval Operation Procedure
+ ... Naval Range
+ ... Negotiations
+ ... Neutral Cube
+ ... Occupation Limits
+ ... Off Map Area
+ ... Operation Sequence
+ ... Operation Types
+ ... Order Of Play
+ ... Ports
+ ... Power Marker
+ ... Power Status Card
+ ... Production
+ ... Production Sequence
+ ... Propaganda
+ ... Provocation
+ ... Regroup
+ ... Remote Area
+ ... Reserve
+ ... Resolving A Flag
+ ... Resolving A Unit
+ ... Resolving An Upgrade
+ ... Retreat
+ ... Rules For Movement
+ ... Sea Area
+ ... Shaded Squares
+ ... Stability
+ ... Stability Test
+ ... Stability Track
+ ... Starting War
+ ... Strategic Bombing
+ ... Subsequent Activation
+ ... Sudden Death
+ ... Supply
+ ... Surprise Attack
+ ... Surrender
+ ... The Cubes
+ ... The Political Display
+ ... The Types Of Operations
+ ... Transfer Of Resources
+ ... Turn Track
+ ... War Offensives
+ ... War Status
+ ... White Cube
+
