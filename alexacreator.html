@@ -12,15 +12,28 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<p/>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-9 mx-auto col-md-9 order-md-2">
+            <img class="img-fluid mb-3 mb-md-0" src="/docs/4.1/assets/img/bootstrap-stack.png" alt="" width="1024" height="860">
+        </div>
+        <div class="col-md-11 order-md-1 text-center text-md-left pr-md-5">
+            <h1 class="mb-3 bd-text-purple-bright">Board Game Voice Creator</h1>
+            <p class="lead">
+                This Javascript will convert plain text rulesets to a simple Alexa application.  See videos for guided instructions, and remember to grab the "help text" below after you generate your code.  You can add this to your web page, so that users know what types of things they can ask your application.
+            </p>
+            <div class="d-flex flex-column flex-md-row lead mb-3">
+                <a href="https://www.youtube.com/watch?v=V1ZjX5I96Mg" target="_blank" class="btn btn-lg btn-bd-primary mb-3 mb-md-0 mr-md-3">Video Instructions, Part 1 </a>
+                <a href="https://www.youtube.com/watch?v=c_GwSydRxnk" target="_blank" class="btn btn-lg btn-bd-primary mb-3 mb-md-0 mr-md-3">Part 2 </a>
+                <a href="https://www.youtube.com/watch?v=nATVhfdDam0" target="_blank" class="btn btn-lg btn-bd-primary mb-3 mb-md-0 mr-md-3">and Part 4 </a>
 
-<header class="d-flex flex-column flex-md-row align-items-md-center p-3 bg-light">
-    <div class="pt-md-3 pb-md-4">
-        <h1 class="bd-title mt-0">Board Game Voice Creator</h1>
-        <p class="bd-lead">This Javascript will convert plain text rulesets to a simple Alexa application.</p>
-        <a href="https://solowargamer.github.io/upload_this_package.zip" class="btn btn-lg btn-bd-primary">Download node
-            modules for upgrading version to 2.x</a>
+                <a href="https://solowargamer.github.io/upload_this_package.zip" class="btn btn-lg btn-outline-secondary">Download Node Modules</a>
+            </div>
+        </div>
     </div>
-</header>
+
+</div>
 
 <p/>
 <div class="row">
@@ -32,14 +45,13 @@
         <select id="alexa_type">
             <option selected="selected">Plain vanilla. Minimal components</option>
             <option>Extra features like dice rolling, health tracking and sound effects</option>
-            <option>Extra features plus customized graphics</option>
         </select>
 
         <p/><br/>
         <p/>
         <h4 class="mb-3 bd-text-purple-bright">Enter your rules here:</h4>
 
-        <textarea ID="rules" rows="6" cols="100" placeholder="
+        <textarea ID="rules" rows="6" cols="140" placeholder="
 !rulenameone
 string to search one
 string to search two
@@ -60,35 +72,39 @@ string to search eight
 ">
 </textarea>
 
-        <p class="bd-lead">
-            <strong>Format:</strong>
-        <p/>
-        <strong>!</strong>RuleName<br/>
-        Something the user will say to search for this rule<br/>
-        <strong>=</strong>The actual rule text goes here
-        </p>
-
-        <p/><br/>
-        <p/>
-        <h4 class="mb-3 bd-text-purple-bright">This is your code for Skills:</h4>
-
-        <textarea ID="skillsFinal" rows="4" cols="100">
-</textarea>
-
-        <p/><br/>
-        <p/>
-        <h4 class="mb-3 bd-text-purple-bright">Your Javascript code for Lambda function:</h4>
-
-        <textarea ID="lambdaFinal" rows="4" cols="100">
-</textarea>
-
         <p/><br/>
         <p/>
         <input type="button" value="Generate Skills and Lambda Code"
                class="btn btn-lg btn-bd-primary mb-3 mb-md-0 mr-md-3" onclick="CreateAlexa();">
 
+        <p/><br/>
+        <h4 class="mb-3 bd-text-purple-bright">Your JSON code for Skills:</h4>
+        Enter at <a href="http://developer.amazon.com" target="_blank">http://developer.amazon.com</a>
+        <br/>
+        <textarea ID="skillsFinal" rows="4" cols="140"></textarea>
+
+        <p/><br/>
+        <h4 class="mb-3 bd-text-purple-bright">Your Javascript code for Lambda function:</h4>
+        Enter at <a href="http://aws.console.amazon.com" target="_blank">http://aws.console.amazon.com</a>
+        <br/>
+        <textarea ID="lambdaFinal" rows="4" cols="140"></textarea>
+
+        <p/><br/>
+        <h4 class="mb-3 bd-text-purple-bright">Help text for your website:</h4>
+        Contains all the keywords from your application, so that users know what to ask Alexa
+        <br/>
+        <textarea ID="helpText" rows="4" cols="140"></textarea>
+
+
     </div>
 </div>
+
+<p/><br/>
+<p class="text-muted mb-0">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Created by Mitch Ashford.  Get support at <a href="mailto:mitch.portaits@gmail.com">mitch.portaits@gmail.com</a>
+</p>
+<p/><br/>
 
 <script>
 
@@ -113,18 +129,18 @@ const %LAMBDA_NAME%Handler = {
     },
     handle(handlerInput) {
         return handlerInput.responseBuilder.speak('%RESPONSE%')
-         .withShouldEndSession(false)
-         .withSimpleCard('%LAMBDA_NAME%','%LAMBDA_NAME%')
-         .getResponse();
-    },
-};
-`;
+         .withShouldEndSession(false) ` +
+'         .withSimpleCard(`%LAMBDA_NAME%`,`%RESPONSE%`)' +
+'         .getResponse();' +
+'    },' +
+'};';
+
 
         var importFile = "templates/";
 
         // These characters are not allowed inside of Skill names
         function ReplaceInvalidChars(sLine) {
-            sLine = sLine.replace('!', '').replace('<', '').replace('>', '').replace('&', '').replace('@', '').replace('?', '').replace("'", "").replace('"', '');
+            sLine = sLine.replace('!', '').replace('<', '').replace('>', '').replace('&', ' and ').replace('@', ' at ').replace('?', '').replace("'", "").replace('"', '');
             return sLine;
         }
 
@@ -136,6 +152,7 @@ const %LAMBDA_NAME%Handler = {
         var sFinalSkillString = '';
         var sFinalLambdaString = '';
         var sFinalLambdaHandlerString = '';
+        var helpText = '';
 
         var textArea = document.getElementById("rules");
         var lineArray = textArea.value.split('\n');
@@ -167,7 +184,8 @@ const %LAMBDA_NAME%Handler = {
             // Key phrases to listen for
             else if (newLine.length > 2) {
                 iTotalLines++;
-                newLine = ReplaceInvalidChars(newLine).replace(',', '').replace('.', '');
+                newLine = ReplaceInvalidChars(newLine);
+                helpText += newLine + '\r\n';
                 if (sSamples != '')
                     sSamples = sSamples + ',"' + newLine + '"\r\n';
                 else
@@ -220,6 +238,7 @@ const %LAMBDA_NAME%Handler = {
 
         $('#skillsFinal').text(vSK);
         $('#lambdaFinal').text(vLA);
+        $('#helpText').text(helpText);
 
         //console.log(sFinalSkillString);
         //console.log(sFinalLambdaString);
